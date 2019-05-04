@@ -1,0 +1,16 @@
+!ex4.7 在梁单元上施加荷载
+finish
+/clear
+/prep7
+et,1,beam3
+k,1
+k,2,10
+l,1,2
+esize,,10
+lmesh,all
+/pnum,elem,1
+sfbeam,3,1,pres,50,100
+sfbeam,5,1,pres,100	
+sfbeam,7,1,pres,50,100,,,0.2,0.1
+sfbeam,9,1,pres,100,,,,0.4,-1
+sfbeam,3,2,pres,50,100,,,0.2,0.1

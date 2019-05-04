@@ -1,0 +1,24 @@
+!ex6.20 ±Ì√Ê«–œÚ∫…‘ÿ
+finish
+/clear
+/prep7
+blc4,,,10,20,30
+et,1,solid95
+et,2,surf154
+esize,2
+mshape,0,3d
+mshkey,1
+vmesh,all
+nsel,s,loc,z,30
+esln
+type,2
+esurf
+esel,s,type,,2
+/psf,pres,tanx,2
+sfe,all,2,pres,,1
+/psf,pres,tany,2
+sfe,all,3,pres,,3
+allsel
+
+
+

@@ -1,0 +1,54 @@
+!EX5.6 面操作及悬臂梁的内力计算
+finish
+/clear
+/prep7
+et,1,solid95
+mp,ex,1,2e11
+mp,prxy,1,0.3
+blc4,2,3,0.2,0.3,4
+da,2,all
+fk,1,fy,-2e4
+fk,3,fy,-2e4
+fk,3,fx,0.8e4
+fk,4,fx,0.8e4
+sfa,1,1,pres,1e6
+esize,0.05
+vmesh,all
+finish
+/solu
+solve
+finish
+/post1
+wpoff,,,2
+sucr,suz2,cplane,3
+sumap,mysx,s,x
+sumap,mysy,s,y
+sumap,mysz,s,z
+sumap,mysxy,s,xy
+sumap,mysyz,s,yz
+sumap,mysxz,s,xz
+
+supl,suz2
+supl,suz2,mysz
+supl,suz2,mysyz
+supl,suz2,mys
+
+supr,all,mysz
+
+sueval,xforce,mysxz,intg !理论结果为-16000,误差1%
+sueval,yforce,mysyz,intg !理论结果为40000，误差0.5%
+sueval,zforce,mysz,intg  !理论结果为-6000，没有误差
+
+sueval,mya,da,sum
+sueval,myya,gcy,intg
+myya=myya/mya
+sueval,myxa,gcx,intg
+myxa=myxa/mya
+
+sucalc,szgcy,mysz,mult,gcy
+sueval,mx1,szgcy,intg
+sucalc,szgcx,mysz,mult,gcx
+sueval,my1,szgcx,intg
+
+mx1=mx1-zforce*myya   !理论结果80000,0.08%
+my1=my1-zforce*myxa   !理论结果-32000,0.2%

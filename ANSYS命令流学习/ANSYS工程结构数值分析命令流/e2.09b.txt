@@ -1,0 +1,20 @@
+!EX2.9B 斜向圆台建模
+finish
+/clear
+/prep7
+r0=3
+r1=2
+h=4
+cyl4,,,r0
+wpoff,r1,,h
+cyl4,,,r1
+*do,i,1,4
+askin,i,i+4
+*enddo
+va,all
+!斜向延伸创建圆台
+vgen,1,1,,,,3*r0,,,,1
+wpcsys
+cyl4,,,r0
+vext,7,,,r1,,h,r1/r0,r1/r0
+

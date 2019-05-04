@@ -1,0 +1,34 @@
+!EX3.8A 过渡四边形映射网格
+finish
+/clear
+/prep7
+et,1,plane42
+k,1
+k,2,10,-1
+k,3,8,6
+k,4,1,3
+a,1,2,3,4
+lesize,1,,,8
+lesize,3,,,3
+lesize,4,,,7
+lesize,2,,,2
+mshape,0,2d
+mshkey,1
+amesh,all
+!EX3.8B 过渡四边形映射网格
+finish
+/clear
+/prep7
+et,1,plane42
+k,1
+k,2,10,-1
+k,3,8,6
+k,4,1,3
+a,1,2,3,4
+lesize,1,,,11
+lesize,3,,,3
+lesize,4,,,2
+lesize,2,,,2
+mshape,0,2d
+mshkey,1
+amesh,all

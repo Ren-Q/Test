@@ -1,0 +1,23 @@
+!ex4.5 节点号及其荷载函数
+finish
+/clear
+/prep7
+et,1,45
+blc4,,,10,10,20
+esize,5
+vmesh,all
+*dim,mypres,,100
+*do,i,1,100
+mypres(i)=i*10.0
+*enddo
+sffun,pres,mypres(1)
+nsel,s,loc,y,10
+sf,all,pres,10
+sflist
+*do,i,1,100
+mypres(i)=i*50.0
+*enddo
+nsel,s,loc,z,20
+sf,all,pres,0
+allsel
+sflist

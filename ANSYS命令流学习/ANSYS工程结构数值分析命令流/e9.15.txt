@@ -1,0 +1,69 @@
+!ex9.15 梁上移动荷载的瞬态分析
+finish
+/clear
+/config,nres,2000
+/prep7
+lb=10   !梁长度
+ne=50   !梁划分的单元数(太小不行)
+nn=ne+1 !节点数
+p=10000  !荷载值
+v=36*1e3/3600 !移动速度36km/h
+deltl=lb/ne
+deltt=deltl/v  !移动一个单元所需时间
+
+em=2.1e11
+area=0.18
+im=0.0054
+deng=7800
+gra=9.8
+f1=acos(-1)/2/lb/lb*sqrt(em*im/(area*deng))
+
+et,1,beam3
+mp,ex,1,em
+mp,nuxy,1,0.2
+mp,dens,1,deng
+r,1,area,im,1.0
+
+*do,i,1,nn
+n,i,(i-1)*deltl
+*enddo
+*do,i,1,ne
+e,i,i+1
+*enddo
+d,1,ux,,,,,uy
+d,nn,uy
+finish
+/solu
+antype,trans
+!静力分析
+sstif,on
+timint,off
+time,1e-5
+acel,,gra
+nsubst,2
+kbc,1
+solve
+!瞬态分析
+timint,on
+outres,all,all
+deltim,deltt/10
+kbc,1
+autots,on
+
+*do,i,1,nn
+time,i*deltt
+fdele,all,all
+f,i,fy,-p
+solve
+*enddo
+!荷载移出后的瞬态分析
+fdele,all,all
+time,lb/v+5/f1
+solve
+
+finish
+/post26
+nc=node(lb/2,0,0)
+nsol,2,nc,u,y
+plvar,2
+

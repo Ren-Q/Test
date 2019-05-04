@@ -1,0 +1,16 @@
+!ex4.2 对线施加约束并转换
+finish
+/clear
+/prep7
+et,1,95
+blc4,,,10,10,10	
+dl,7,,ux,0.1
+dl,5,,all
+dl,11,6,symm
+dl,10,6,asym
+dl,6,,symm 
+dllist 
+esize,2
+vmesh,all 
+dtran
+dlist

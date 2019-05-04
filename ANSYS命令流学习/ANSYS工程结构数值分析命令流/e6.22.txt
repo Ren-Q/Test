@@ -1,0 +1,74 @@
+!EX6.22A 通过计算直接加载
+finish
+/clear
+/prep7
+a=10
+l=100
+blc4,,,a,a,l
+et,1,solid95
+et,2,surf154
+esize,2
+mshape,0,3d
+mshkey,1
+vmesh,all
+nsel,s,loc,y,a
+esln
+type,2
+esurf
+esel,s,type,,2
+*get,elemnum,elem,,count
+*get,etempno,elem,,num,min
+x1=centrx(etempno)
+z1=centrz(etempno)
+q=10+0.5*x1*x1+0.01*z1*z1
+sfe,etempno,1,pres,,q
+*do,i,2,elemnum
+etempno=elnext(etempno)
+x1=centrx(etempno)
+z1=centrz(etempno)
+q=10+0.5*x1*x1+0.01*z1*z1
+sfe,etempno,1,pres,,q
+*enddo
+allsel,all
+!----------------------------
+!EX6.22B 函数加载
+finish
+/clear
+/prep7
+a=10
+l=100
+blc4,,,a,a,l
+et,1,solid95
+et,2,surf154
+esize,2
+mshape,0,3d
+mshkey,1
+vmesh,all
+nsel,s,loc,y,a
+esln
+type,2
+esurf
+esel,s,type,,2
+*DIM,q,TABLE,6,12,1
+!Begin of equation: 10+0.5*{X}^2+0.01*{Z}^2
+q(0,0,1)= 0.0, -999   
+q(0,1,1)= 1.0, -1, 0, 2, 0, 0, 2  
+q(0,2,1)= 0.0, -2, 0, 1, 2, 17, -1
+q(0,3,1)=   0, -1, 0, 0.5, 0, 0, -2   
+q(0,4,1)= 0.0, -3, 0, 1, -1, 3, -2
+q(0,5,1)= 0.0, -1, 0, 10, 0, 0, -3
+q(0,6,1)= 0.0, -2, 0, 1, -1, 1, -3
+q(0,7,1)= 0.0, -1, 0, 2, 0, 0, 4  
+q(0,8,1)= 0.0, -3, 0, 1, 4, 17, -1
+q(0,9,1)= 0.0, -1, 0, 0.01, 0, 0, -3  
+q(0,10,1)= 0.0, -4, 0, 1, -1, 3, -3   
+q(0,11,1)= 0.0, -1, 0, 1, -2, 1, -4   
+q(0,12,1)= 0.0, 99, 0, 1, -1, 0, 0
+!End of equation: 10+0.5*{X}^2+0.01*{Z}^2  
+sfe,all,1,pres,,%q%
+allsel,all
+
+
+
+
+

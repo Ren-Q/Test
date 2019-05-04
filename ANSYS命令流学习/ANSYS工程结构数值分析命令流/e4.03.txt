@@ -1,0 +1,22 @@
+!ex4.3 施加集中荷载与节点坐标系
+finish
+/clear
+/prep7
+et,1,beam4 
+k,1
+k,2,5
+k,3,10
+l,1,2
+l,2,3 
+local,12,0,,,,90
+nrotat,all
+dk,1,all
+fk,2,fy,-1000
+esize,1
+lmesh,all 
+nrotat,all
+lplot
+fk,3,fy,1000 
+f,6,fx,-1000 
+sbctran 
+eplot

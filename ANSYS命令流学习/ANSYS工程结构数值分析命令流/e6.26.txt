@@ -1,0 +1,64 @@
+!EX6.26 梁单元与实体单元的铰接
+finish
+/clear
+/prep7
+l1=2
+l2=4
+b=1.6
+h=2
+err=0.1
+et,1,solid95
+et,2,beam4
+mp,ex,1,3.3e10
+mp,prxy,1,0.2
+mp,ex,2,2.1e11
+mp,prxy,2,0.3
+r,1,0.00908,2.14e-3,1.45e-2,0.3,0.2
+rmore,,6.52e-5
+/view,1,1,1,1
+/ang,1,-120,zs,1
+blc4,,,l1,b,h
+wpoff,,,h/2
+vsbw,all
+wpoff,,b/2
+wprota,,90
+vsbw,all
+wpcsys,-1
+k,50,l1+l2/2,b/2,h/2
+k,51,l1+l2,b/2,h/2
+l,16,50
+l,50,51
+asel,s,loc,x,0
+da,all,all
+ksel,s,loc,x,l1+l2
+dk,all,all
+fk,50,fx,1e4
+fk,50,fy,2e4
+fk,50,fz,-3e4
+fk,50,mx,1.5e4
+vsel,all
+vatt,1,,1
+esize,0.2
+mshape,0
+mshkey,1
+vmesh,all
+
+lsel,s,loc,x,l1+err,l1+l2
+latt,2,1,2
+lesize,all,,,4
+lmesh,all
+allsel
+finish
+/solu
+solve
+/post1
+pldisp,1
+ETABLE,FXI,SMISC,1$ETABLE,FXJ,SMISC,7		!单元杆端FX
+ETABLE,FYI,SMISC,2$ETABLE,FYJ,SMISC,8		!单元杆端FY
+ETABLE,FZI,SMISC,3$ETABLE,FZJ,SMISC,9		!单元杆端FZ
+ETABLE,MXI,SMISC,4$ETABLE,MXJ,SMISC,10		!单元杆端MX
+ETABLE,MYI,SMISC,5$ETABLE,MYJ,SMISC,11		!单元杆端MY
+ETABLE,MZI,SMISC,6$ETABLE,MZJ,SMISC,12		!单元杆端MZ
+plls,mxi,mxj
+
+

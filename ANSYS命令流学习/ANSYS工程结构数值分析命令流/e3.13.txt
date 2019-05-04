@@ -1,0 +1,25 @@
+!EX3.13 圆环的网格划分
+finish
+/clear
+/prep7
+et,1,plane82
+r0=10
+cyl4,,,r0/3,,r0,90
+cyl4,2*r0,,r0/10,,r0,90
+asel,s,loc,x,-r0,r0
+lsla,s
+lesize,all,,,8
+lsel,r,length,,r0*2/3
+lesize,all,,,3,,1
+mshape,0,2d
+mshkey,1
+amesh,all
+asel,s,loc,x,2*r0,4*r0
+lsla,s
+lesize,5,,,12
+lesize,7,,,6
+lsel,s,length,,r0*9/10
+lesize,all,,,7
+amesh,all
+
+

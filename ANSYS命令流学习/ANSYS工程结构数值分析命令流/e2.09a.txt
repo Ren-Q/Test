@@ -1,0 +1,19 @@
+!Ex2.9A 上圆下方体的建模
+finish 
+/CLEAR 
+/PREP7 
+N=7
+a=4
+!创建正多边形
+rpoly,n,,a
+!创建由N条线形成的圆面
+lsel,none
+k,n+1,,,3*a
+circle,n+1,a/2,,,,n
+al,all
+allsel
+!生成侧面
+*do,i,1,n
+ASKIN,i,i+n
+*enddo
+VA,all !生成体积 

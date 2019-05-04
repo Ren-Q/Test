@@ -1,0 +1,22 @@
+!EX3.7B 简化映射网格划分
+finish
+/clear
+/prep7
+et,1,plane82
+k,1,5
+k,2,10
+k,3,11,6
+k,4,6,15
+k,5,-1,8
+k,6,,4
+l,1,2
+l,2,3
+l,3,4
+larc,4,5,3,10
+l,5,6
+l,6,1
+al,all
+esize,,6
+mshape,0
+amap,1,2,5,3,4
+

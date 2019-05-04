@@ -1,0 +1,18 @@
+!ex4.9 利用荷载梯度在直角坐标系下的施加方法
+finish
+/clear
+/prep7
+et,1,82
+blc4,,,10,60
+esize,2
+amesh,all
+/psf,pres,norm,2
+sfgrad,pres,,y,0,-5
+nsel,s,loc,x,0
+nsel,r,loc,y,0,40
+sf,all,pres,600
+sfgrad,pres,,y,30,-20
+nsel,s,loc,x,10
+sf,all,pres,0
+allsel
+eplot

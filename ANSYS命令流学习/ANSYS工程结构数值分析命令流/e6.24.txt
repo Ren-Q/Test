@@ -1,0 +1,24 @@
+!EX6.24 切面技术
+!前接EX6.21A
+mp,ex,1,2e5
+mp,prxy,1,0.3
+da,1,all,all
+/solu
+solve
+/post1
+plnsol,s,z
+wpoff,,,50
+/cplane,1
+/contour,,9,-7300,,7300 
+/type,1,1 !sect
+plnsol,s,z
+/type,1,5 !cap
+plnsol,s,z
+/type,1,8 !ZQSL
+plnsol,s,z
+/type
+/contour
+sucr,suz1,cplane,3
+sumap,mysz,s,z
+supl,suz1,mysz
+

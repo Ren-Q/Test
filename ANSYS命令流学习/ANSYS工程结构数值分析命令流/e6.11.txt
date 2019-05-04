@@ -1,0 +1,50 @@
+!EX6.11 不同节点连接刚度分析
+finish
+/clear
+/prep7
+dof,ux,uy,rotz
+et,1,beam3
+et,2,matrix27,,,4
+mp,ex,1,2e11
+mp,prxy,1,0.3
+r,1,1e-2,32e-5,0.5
+r,2
+kx1=1e20  !0,1e20,1e6,1e20
+rmodif,2,1,kx1
+rmodif,2,7,-kx1
+rmodif,2,58,kx1
+ky1=1e20 !0,1e20,1e6,1e20
+rmodif,2,13,ky1
+rmodif,2,19,-ky1
+rmodif,2,64,ky1
+krz1=1e20 !0,0,1e7,1e20
+rmodif,2,51,krz1
+rmodif,2,57,-krz1
+rmodif,2,78,krz1
+k,1,,4
+k,2,2,4
+k,3,4,4
+k,4,4,4
+k,5,4,2
+k,6,4,0
+l,1,2
+l,2,3
+l,4,5
+l,5,6
+dk,1,all
+dk,6,all
+fk,2,fy,-1000
+fk,5,fx,-1000
+latt,1,1,1
+lesize,all,,,1
+lmesh,all
+type,2
+real,2
+e,3,4
+/solu
+solve
+/post1
+pldisp,1
+etable,mi,smisc,6
+etable,mj,smisc,12
+plls,mi,mj,-1

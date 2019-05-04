@@ -1,0 +1,27 @@
+!EX6.14 变壁厚圆柱建模(1/4结构)
+finish
+/clear
+/prep7
+r0=6
+h=15
+t1=0.8
+t2=0.3
+et,1,shell93
+csys,1
+k,1,r0,0
+k,2,r0,90
+k,3,r0,,h
+l,1,2
+l,1,3
+adrag,1,,,,,,2
+esize,0.5
+mshkey,1
+amesh,all
+*get,nodemax,node,,count
+*dim,thick,,nodemax
+*do,i,1,nodemax
+thick(i)=t1-(t1-t2)/h*nz(i)
+*enddo
+rthick,thick(1)
+/eshape,1
+eplot

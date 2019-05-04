@@ -1,0 +1,35 @@
+!EX3.21 Z形面网格划分及局部细分
+finish
+/clear
+/prep7
+blc4,,,15,10
+blc4,10,6,14,12
+aadd,all
+wprota,,-90
+wpoff,,,6
+asbw,all
+wpoff,,,4
+asbw,all
+wprota,,,90
+wpoff,,,10
+asbw,all
+wpoff,,,5
+asbw,all
+wpcsys,-1
+et,1,82
+esize,2
+mshape,0,2d
+mshkey,1
+amesh,all
+krefine,9,10,1,1,,off !不光滑处理（节点位置不变）
+aclear,all
+amesh,all
+krefine,9,10,1,1,,smooth !光滑处理，节点位置可改变，但既有单元不删除
+aclear,all
+amesh,all
+krefine,9,10,1,1   !光滑处理，可删除既有单元重细分，节点位置改变
+
+
+
+
+

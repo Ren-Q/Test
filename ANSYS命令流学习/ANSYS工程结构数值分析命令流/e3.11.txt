@@ -1,0 +1,18 @@
+!EX3.11 拉伸类命令生成体单元网格
+finish
+/clear
+/prep7
+et,1,82
+et,2,95
+blc4,,,4,4
+blc4,6,,4,4
+blc4,12,,4,4
+blc4,18,,4,4
+esize,1
+amesh,all
+esize,,8
+vrotat,1,,,,,,1,4,90
+vext,2,,,,,10,0.5,0.5
+voffst,3,10
+vdrag,4,,,,,,35
+

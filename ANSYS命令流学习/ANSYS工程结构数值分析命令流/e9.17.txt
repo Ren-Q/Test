@@ -1,0 +1,86 @@
+!ex9.17 有预应力时梁上移动荷载的瞬态分析
+finish
+/clear
+/config,nres,4000
+/prep7
+lb=20    !梁长度
+ne=100   !梁划分的单元数
+nn=ne+1  !节点数
+p=10000  !荷载值
+v=18*1e3/3600 !移动速度18km/h
+deltl=lb/ne
+deltt=deltl/v  !移动一个单元所需时间
+
+em=2.1e11
+area=0.2
+im=0.006
+deng=7800
+gra=9.8
+
+
+et,1,beam3
+mp,ex,1,em
+mp,nuxy,1,0.2
+mp,dens,1,deng
+r,1,area,im,1.0
+
+*do,i,1,nn
+n,i,(i-1)*deltl
+*enddo
+*do,i,1,ne
+e,i,i+1
+*enddo
+d,1,ux,,,,,uy
+d,nn,uy
+finish
+/solu
+antype,trans
+!静力分析
+sstif,on
+timint,off
+time,1e-5
+acel,,gra
+
+f,node(5,0,0),fy,-20e3
+f,node(10,0,0),fy,-60e3
+f,node(15,0,0),fy,-30e3
+
+nsubst,2
+kbc,1
+lswrite,1
+!瞬态分析
+timint,on
+outres,all,all
+deltim,deltt/10
+kbc,1
+autots,on
+
+time,1*deltt
+f,1,fy,-p
+lswrite,2
+
+
+*do,i,2,nn
+time,i*deltt
+*get,pi1,node,i-1,f,fy
+*get,pi,node,i,f,fy
+f,i-1,fy,pi1+p
+f,i,fy,pi-p
+lswrite,i+1
+*enddo
+!荷载移出后的瞬态分析
+fdele,nn,all
+time,lb/v+1.0
+lswrite,nn+2
+
+lssolve,1,nn+2
+
+finish
+/post26
+nc=node(lb/2,0,0)
+nsol,2,nc,u,y
+plvar,2
+
+esol,3,50,51,m,z
+plvar,3
+

@@ -1,0 +1,13 @@
+!EX3.4B 中间节点位置控制网格划分比较
+finish
+/clear
+/prep7
+et,1,plane82
+cyl4,,,4,,8,60
+lesize,all,,,2
+mshape,0
+mshkey,1
+mshmid,0
+!mshmid,1
+!mshmid,2
+amesh,all

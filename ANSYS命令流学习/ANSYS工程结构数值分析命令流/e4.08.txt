@@ -1,0 +1,26 @@
+!ex4.8a 在线上施加面荷载
+finish
+/clear
+/prep7
+et,1,82
+blc4,,,10,30
+esize,5
+amesh,all
+/psf,pres,norm,2
+sfl,4,pres,10,60
+sfl,2,pres,60
+sftran
+eplot
+!ex4.8b 在线上施加面荷载
+finish
+/clear
+/prep7
+et,1,shell63
+wprota,,90
+blc4,,,10,30
+esize,5
+amesh,all
+sfl,3,pres,100
+sftran
+eplot
+
